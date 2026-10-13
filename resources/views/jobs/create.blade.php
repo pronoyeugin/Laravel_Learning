@@ -18,12 +18,30 @@
             <input type="text" id="title" name="title" placeholder="Shift Leader" required
                class="w-full rounded-md border border-slate-300 bg-transparent px-2 py-2 text-sm text-slate-900 placeholder:text-slate-500 focus:border-indigo-600 focus:outline-none focus:ring-1 focus:ring-indigo-600" />
          </div>
+            @error('title')
+               <p class="text-red-500 text-xs font-bold">{{ $message }}</p>
+            @enderror
          <div>
             <label for="salary" class="mb-2 inline-block text-sm font-medium text-slate-900">Salary</label>
             <input type="text" id="salary" name="salary" placeholder="$50,000 Per Year" required
                class="w-full rounded-md border border-slate-300 bg-transparent px-2 py-2 text-sm text-slate-900 placeholder:text-slate-500 focus:border-indigo-600 focus:outline-none focus:ring-1 focus:ring-indigo-600" />
          </div>
+            @error('salary')
+               <p class="text-red-500 text-xs font-bold">{{ $message }}</p>
+            @enderror
       </div>
+
+      <!-- <div>
+         @if ($errors->any()) 
+            <ul>
+               @foreach ($errors->all() as $error)
+                  <li class="text-red-500  text-sm-bold">{{ $error }}</li>
+               @endforeach
+            </ul>
+
+         @endif
+      </div> -->
+      
 
       <div class="flex justify-end gap-4 border-t border-slate-200 pt-4">
          <a href="/jobs"
