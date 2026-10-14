@@ -23,7 +23,7 @@
             @enderror
          <div>
             <label for="salary" class="mb-2 inline-block text-sm font-medium text-slate-900">Salary</label>
-            <input type="text" id="salary" name="salary" placeholder="$50,000 Per Year" required
+            <input type="number" id="salary" name="salary" placeholder="50000" min="0" step="any" required
                class="w-full rounded-md border border-slate-300 bg-transparent px-2 py-2 text-sm text-slate-900 placeholder:text-slate-500 focus:border-indigo-600 focus:outline-none focus:ring-1 focus:ring-indigo-600" />
          </div>
             @error('salary')
@@ -31,27 +31,30 @@
             @enderror
       </div>
 
-      <!-- <div>
-         @if ($errors->any()) 
-            <ul>
-               @foreach ($errors->all() as $error)
-                  <li class="text-red-500  text-sm-bold">{{ $error }}</li>
-               @endforeach
-            </ul>
-
-         @endif
-      </div> -->
-      
 
       <div class="flex justify-end gap-4 border-t border-slate-200 pt-4">
-         <a href="/jobs"
-            class="rounded-md px-2 py-2 text-sm font-medium text-slate-900 hover:text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-1">
-            Cancel
-         </a>
-         <button type="submit"
-            class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-1">
-            Save
-         </button>
+
+         <div class="">
+            <button>Delete</button>
+         </div>
+
+         
+         <div class="flex justify-end gap-4 >
+
+            <a href="/jobs"
+               class="rounded-md px-2 py-2 text-sm font-medium text-slate-900 hover:text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-1">
+               Cancel
+            </a>
+            <div>
+                <button type="submit"
+                  class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-1">
+                  Save
+               </button>
+            </div>
+
+
+         </div>
+        
       </div>
    </form>
 </main>
