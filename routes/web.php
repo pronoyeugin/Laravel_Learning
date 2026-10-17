@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\RegisterUserController;
+use App\Http\Controllers\SessionController;
 use App\Models\Job;
 use Illuminate\Support\Facades\Route;
 
@@ -10,6 +12,13 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'welcome')->name('home');
 Route::resource('jobs', JobController::class);
 Route::view('/contact', 'contact')->name('contact');
+
+Route::get('register', [RegisterUserController::class, 'create']);
+Route::post('register', [RegisterUserController::class, 'store']);
+Route::get('login', [SessionController::class, 'create']); 
+Route::post('login', [SessionController::class, 'store']); 
+
+
 
 // Route::controller(JobController::class)->group(function () {
 //     Route::get('/jobs', 'index')->name('jobs.index');
