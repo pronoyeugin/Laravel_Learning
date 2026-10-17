@@ -7,49 +7,16 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/', 'welcome')->name('home');
+Route::resource('jobs', JobController::class);
+Route::view('/contact', 'contact')->name('contact');
 
-Route::get('/jobs', [JobController::class, 'index'])->name('jobs.index');
-
-Route::get('/jobs/create', [JobController::class, 'create'])->name('jobs.create');
-
-
-//Job page
-Route::get('/jobs/create', [JobController::class, 'store'])->name('jobs.create');
-
-//create job
-Route::post('/jobs', [JobController::class, 'store'])->name('jobs.store');
-
-//show job
-Route::get('/jobs/{job}', [JobController::class, 'show'])->name('jobs.show');
-
-    
-
-
-
-//Edit job
-Route::get('/jobs/{job}/edit', [JobController::class, 'edit'])->name('jobs.edit');
-
-//Update job
-Route::patch('/jobs/{job}', [JobController::class, 'update'])->name('jobs.update');
-
-//Destroy job
-Route::delete('/jobs/{job}', [JobController::class, 'destroy'])->name('jobs.destroy');
-
-
-
-
-
-
-//Destroy job
-Route::delete('/jobs/{job}', function (Job $job) {
-
-    
-});
-
-
-Route::get('/contact', function () {
-    return view('contact');
-});
+// Route::controller(JobController::class)->group(function () {
+//     Route::get('/jobs', 'index')->name('jobs.index');
+//     Route::get('/jobs/create', 'create')->name('jobs.create');
+//     Route::post('/jobs', 'store')->name('jobs.store');
+//     Route::get('/jobs/{job}', 'show')->name('jobs.show');
+//     Route::get('/jobs/{job}/edit', 'edit')->name('jobs.edit');
+//     Route::patch('/jobs/{job}', 'update')->name('jobs.update');
+//     Route::delete('/jobs/{job}', 'destroy')->name('jobs.destroy');
+// });
