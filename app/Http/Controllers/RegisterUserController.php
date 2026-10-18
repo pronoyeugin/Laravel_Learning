@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rules\Password;
 
 class RegisterUserController extends Controller
 {
@@ -13,28 +16,19 @@ class RegisterUserController extends Controller
 
    public function store()
    {
+      $attributes = request()->validate([
+         'first_name' => ['required'],
+         'last_name' => ['required'],
+         'email' => ['required', 'email', 'unique:users'],
+         'password' => ['required', Password::min(6), 'confirmed'],
+      ]);
+      
+      $user = User::create($attributes);
 
-    dd(request()->all());
-    
-    //   $request->validate([
-    //      'first_name' => 'required|string|max:255',
-    //      'last_name' => 'required|string|max:255',
-    //      'email' => 'required|string|email|max:255|unique:users',
-    //      'password' => 'required|string|min:8|confirmed',
-    //   ]);
+      Auth::login($user);
 
-    //   // Create the user
-    //   $user = \App\Models\User::create([
-    //      'first_name' => $request->first_name,
-    //      'last_name' => $request->last_name,
-    //      'email' => $request->email,
-    //      'password' => bcrypt($request->password),
-    //   ]);
+      return redirect('/')->with('success', 'Your account has been created.');
 
-    //   // Log the user in
-    //   auth()->login($user);
-
-    //   return redirect()->route('home')->with('success', 'Registration successful!');
    }
 
 
