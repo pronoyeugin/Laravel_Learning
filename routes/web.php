@@ -10,15 +10,36 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::view('/', 'welcome')->name('home');
-Route::resource('jobs', JobController::class);
 Route::view('/contact', 'contact')->name('contact');
 
+
+
+
+
+//Jobs
+Route::get('/jobs', [JobController::class, 'index']);
+Route::get('/jobs/create', [JobController::class, 'create']);
+Route::post('/jobs', [JobController::class, 'store'])->middleware('auth');
+Route::get('/jobs/{job}', [JobController::class, 'show']);
+
+Route::get('/jobs/{job}/edit', [JobController::class, 'edit'])
+    ->middleware('auth')
+    ->can('edit', 'job');
+
+Route::patch('/jobs/{job}', [JobController::class, 'update'])
+    ->middleware('auth');
+Route::delete('/jobs/{job}', [JobController::class, 'destroy'])
+    ->middleware('auth');
+
+
+//Auth
 Route::get('/register', [RegisterUserController::class, 'create']);
 Route::post('/register', [RegisterUserController::class, 'store']);
-Route::get('/login', [SessionController::class, 'create']); 
-Route::post('/login', [SessionController::class, 'store']); 
-Route::post('/logout', [SessionController::class, 'destroy']); 
 
+
+Route::get('/login', [SessionController::class, 'create'])->name('login');
+Route::post('/login', [SessionController::class, 'store']);
+Route::post('/logout', [SessionController::class, 'destroy']);
 
 
 // Route::controller(JobController::class)->group(function () {
