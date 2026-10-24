@@ -9,12 +9,22 @@ use Illuminate\Support\Facades\Route;
 
 
 
+
+
 Route::view('/', 'welcome')->name('home');
 Route::view('/contact', 'contact')->name('contact');
 
 
+//mail test route\
 
+Route::get('test', function(){
+    
+    \Illuminate\Support\Facades\Mail::to('pronoykhalko@gmail.com')->send(
+        new \App\Mail\JobPosted()
+    );
 
+    return 'Done';
+});
 
 //Jobs
 Route::get('/jobs', [JobController::class, 'index']);
