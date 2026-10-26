@@ -3,7 +3,9 @@
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\RegisterUserController;
 use App\Http\Controllers\SessionController;
+use App\Jobs\TranslateJob;
 use App\Models\Job;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 
@@ -15,16 +17,21 @@ Route::view('/', 'welcome')->name('home');
 Route::view('/contact', 'contact')->name('contact');
 
 
-//mail test route\
-
 Route::get('test', function(){
     
-    \Illuminate\Support\Facades\Mail::to('pronoykhalko@gmail.com')->send(
-        new \App\Mail\JobPosted()
-    );
+    // dispatch(function(){
+    //     logger('Hello form the queue!');
+    // });
+
+    // \App\Jobs\TranslateJob::dispatch();
+
+    $job = Job::first();
+    TranslateJob::dispatch($job);
 
     return 'Done';
+
 });
+
 
 //Jobs
 Route::get('/jobs', [JobController::class, 'index']);
