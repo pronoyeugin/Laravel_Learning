@@ -8,4 +8,6 @@
     /* --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji'; */
     --color-black: #060606;
+    --font-family : "Hanken Grokesk", "sans-serif";
+    --font-size:"2xs","10px";
 }
