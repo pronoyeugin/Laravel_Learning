@@ -9,7 +9,7 @@
         rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-black text-white font-hanken-grotesk">
+<body class="bg-black text-white font-hanken-grotesk pb-20">
     
     <div class="px-10">
         <nav class="flex justify-between items-center py-4 border-b border-white/25">
@@ -24,9 +24,28 @@
                 <a href="#">Salaries</a>
                 <a href="#">Companies</a>
             </div>
-            <div>
-                <a href="#">Post a Job</a>
-            </div>
+
+            @auth
+                <div class="space-x-6 font-bold flex">
+                    <a href="/jobs/create">Post a Job</a>
+        
+                    <form action="/logout" method="POST">
+                        @csrf
+                        @method('DELETE')
+                    <button type="submit" class="text-sm font-bold">Log Out</button>
+                    </form>
+                </div>
+            @endauth
+
+
+            @guest
+                <div class="space-x-6 font-bold">
+                    <a href="/register">Sign Up</a>
+                    <a href="/login">Log In</a>
+                </div>
+
+            @endguest
+
         </nav>
 
         <main class="mt-10 mx-w-[986px] mx-auto">
